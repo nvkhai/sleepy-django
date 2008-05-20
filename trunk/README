@@ -1,0 +1,45 @@
+Sleepy Django
+=============
+
+Thanks for using Sleepy Django!
+
+Installation
+------------
+
+From a command prompt/shell type:
+
+	python setup.py install
+
+Make sure you have the sufficient priviledges (su or sudo on a linux system).
+
+
+What is Sleepy?
+---------------
+
+Sleepy, allows you to create a static site by rendering Django templates to HTML.
+
+
+Why?
+---
+
+This allows for, easy prototyping and easier creation of static websites, where
+the whole workhorse of Django is not needed.
+
+You are allowed to use all of Django's builtin tags and filters.
+
+If you want more, you can always move to the actual Django, since the templates
+are totally compatible.
+
+
+How?
+----
+
+You can create a new project by typing:
+
+	sleepy.py --startproject=myfunsite
+
+Add your templates in there, when you're ready you can compile them by doing:
+
+	sleepy.py --make
+
+And voila! 
