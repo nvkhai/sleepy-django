@@ -1,4 +1,4 @@
-#!/usr/bin/evn python
+#!/usr/bin/env python
 
 # Copyright (C) 2008 Panos Laganakos <panos.laganakos@gmail.com>
 #	 
