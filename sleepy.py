@@ -1,5 +1,7 @@
 #!/usr/bin/env python
 
+__version__ = '0.1.1'
+
 # Copyright (C) 2008 Panos Laganakos <panos.laganakos@gmail.com>
 #	 
 # This program is free software: you can redistribute it and/or modify
@@ -99,7 +101,7 @@ def main():
 		pass
 	if len(sys.argv) < 2:
 		print 'Type sleepy.py --help'
-	parser = OptionParser()
+	parser = OptionParser(version=__version__)
 	parser.add_option('--make', action='callback', callback=make_html_callback)
 	parser.add_option('--startproject', action='callback', callback=start_project_callback,
 		type='string', dest='name', help='start a new project NAME')
