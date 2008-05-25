@@ -41,13 +41,14 @@ TEMPLATE_DIRS = (
 def _make_page(template, output_dir=''):
 	from django.shortcuts import render_to_response
 	from django.template import TemplateDoesNotExist
-	print template
 	try:
 		rsp = render_to_response(template)
 	except TemplateDoesNotExist, e:
-		print 'Error: template %s does not exist' % e,
+		print 'Error: template %s does not exist\n' % e,
 		return
-	template_name = locals()['template']
+	
+	template_name = locals()['template'].split('/')[-1]
+
 	if output_dir == '':
 		page = file(template_name+'_output.html', 'w')
 	else:
@@ -55,16 +56,24 @@ def _make_page(template, output_dir=''):
 	page.write(rsp.content)
 	page.close()
 
-def _make_pages(template_dir, output_dir, recursive=True):
+def _make_pages(template_dir, output_dir, subdir=None, recursive=True):
 	try:
 		for template in os.listdir(template_dir):
-			if not template.startswith('.') and not os.path.isdir(os.path.join(template_dir, template)):
-				_make_page(template, output_dir)
-			if os.path.isdir(os.path.join(template_dir, template)):
-				#print os.path.join(template_dir, template)
-				_make_pages(os.path.join(template_dir, template), output_dir)
+			if not template.startswith('.'):
+				if os.path.isdir(os.path.join(template_dir, template)):
+					_make_pages(os.path.join(template_dir, template), output_dir, template)
+					continue
+
+				if subdir == None:
+					_make_page(template, output_dir)
+					print template
+				else:
+					if not template == subdir:
+						_make_page(subdir+'/'+template, output_dir)
+						print subdir+'/'+template
+
 	except OSError, e:
-		print 'Error: %s' % (e,)
+		print 'Error: %s' % e,
 
 def _start_project(name):
 	cur_dir = os.path.abspath(os.path.curdir)
